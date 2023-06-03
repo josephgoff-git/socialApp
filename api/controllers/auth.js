@@ -1,44 +1,79 @@
 import { db } from "../connect.js"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
+import moment from "moment";
 
 // Register function
-export const register = (req,res)=>{
-    //Check if the user exists 
-    const q = "SELECT * FROM users WHERE username = ?"
+export const register = (req, res) => {
+    const q = "SELECT * FROM users WHERE email = ?";
+  
+    db.query(q, [req.body.email], (err, data) => {
+      if (err) {
+        console.log(err)
+        return res.status(500).json(err);
+      }
+        if (data.length) return res.status(409).json("User already exists!"
+      );
+  
+      const salt = bcrypt.genSaltSync(10);
+      const hashedPassword = bcrypt.hashSync(req.body.password, salt);
+  
+      const q1 =
+        "INSERT INTO users (`username`,`email`,`password`,`name`,`profilePic`,`coverPic`,`city`,`website`) VALUE (?)";
+      const values1 = [
+        req.body.username,
+        req.body.email,
+        hashedPassword,
+        req.body.name,
+        req.body.profilePic,
+        req.body.coverPic,
+        req.body.city,
+        req.body.website,
+      ];
+  
+      db.query(q1, [values1], (err, data) => {
+        if (err) return res.status(500).json(err);
+        const newUserId = data.insertId;
 
-    db.query(q,[req.body.username],(err,data)=>{
-        // If there was an error
-        if(err) return res.status(500).json(err)
+        const q2 = "INSERT INTO relationships(`followerUserId`, `followedUserId`) VALUES (?)";
+        if (req.body.ids.length > 0) {
+            for (let i=0;i<req.body.ids.length;i++) {
+                const values2 = [newUserId, req.body.ids[i]];
+    
+                db.query(q2, [values2], (err, data) => {
+                    if (err) return res.status(500).json(err);
+                });
 
-        // If the data array returned has any contents, the username is already in the database
-        if(data.length) return res.status(409).json("User already exists!")
+                db.query(q2, [values2.reverse()], (err, data) => {
+                    if (err) return res.status(500).json(err);
+                });
 
-        // Otherwise, create a new user - hash the password
-        const salt = bcrypt.genSaltSync(10);
-        const hashedPassword = bcrypt.hashSync(req.body.password, salt);
+                const q3 = "INSERT INTO messages(`desc`,`createdAt`, `userId`, `receiverId`) VALUES (?)";
 
-        // Insert user into the database with 4 required values
-        const q = "INSERT INTO users (`username`,`email`,`password`,`name`) VALUE (?)"
-
-        const values = [req.body.username, req.body.email, hashedPassword, req.body.name,]
-
-        db.query(q,[values],(err,data)=>{
-            // If there was an error entering into the database
-            if(err) return res.status(500).json(err)
+                const values3 = [
+                    "Hi!",
+                    moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+                    req.body.ids[i],
+                    newUserId
+                ];
             
-            // Otherwise, the user was successfully created
-            return res.status(200).json("User has been created.")
-        })
-    })
-}
+                db.query(q3, [values3], (err,data)=>{
+                    if(err) return res.staus(500).json(err)
+                });
+            }    
+        }
+        return res.status(200).json("User has been created.");
+    });
+    });
+  };
+  
 
 // Login Function
 export const login = (req,res)=>{
 
-    const q = "SELECT * FROM users WHERE username = ?"
+    const q = "SELECT * FROM users WHERE email = ?"
 
-    db.query(q,[req.body.username],(err,data)=>{
+    db.query(q,[req.body.email],(err,data)=>{
         // If there is an error
         if(err) return res.status(500).json(err)
 

@@ -2,55 +2,52 @@ import { db } from "../connect.js"
 import jwt from "jsonwebtoken";
 import moment from "moment";
 
-export const getPosts = (req,res) => {
-
-    const userId = req.query.userId
+export const getMessages = (req, res) => {
     const token = req.cookies.accessToken;
-    if(!token) return res.status(401).json("Not logged in!")
-
-    jwt.verify(token, "secretkey", (err,userInfo)=> {
-        if(err) return res.status(403).json("Token is invalid!")
-       
-        const q = userId !== "undefined"
-            ? `SELECT p.*, u.id AS userId, username, name, profilePic FROM posts AS p JOIN users AS u ON (u.id = p.userId) WHERE p.userId = ? ORDER BY p.createdAt DESC` 
-            : `SELECT p.*, u.id AS userId, username, name, profilePic FROM posts AS p JOIN users AS u ON (u.id = p.userId)
-            LEFT JOIN relationships AS r ON (p.userId = r.followedUserId) WHERE r.followerUserId= ? OR p.userId =?
-            ORDER BY p.createdAt DESC
-            `;
-
-        const values = userId !== "undefined" ? [userId] : [userInfo.id, userInfo.id]
-    
-        db.query(q, values, (err,data)=>{
-            if(err) return res.staus(500).json(err)
-            return res.status(200).json(data);
-        });
+    if (!token) return res.status(401).json("Not logged in!");
+  
+    jwt.verify(token, "secretkey", (err, userInfo) => {
+      if (err) return res.status(403).json("Token is invalid!");
+  
+      const q = `
+        SELECT m.*, u.id AS userId, u.username, u.name, u.profilePic
+        FROM messages AS m
+        JOIN users AS u ON u.id = m.userId
+        ORDER BY m.createdAt DESC
+      `;
+  
+      db.query(q, (err, data) => {
+        if (err) return res.status(500).json(err);
+        return res.status(200).json(data);
+      });
     });
-};
+  };
 
-export const addPost = (req,res) => {
+export const addMessage = (req,res) => {
     const token = req.cookies.accessToken;
     if(!token) return res.status(401).json("Not logged in!")
 
     jwt.verify(token, "secretkey", (err,userInfo)=> {
         if(err) return res.status(403).json("Token is invalid!")
        
-        const q = "INSERT INTO posts(`desc`, `img`, `createdAt`, `userId`) VALUES (?)";
+        const q = "INSERT INTO messages(`desc`, `img`, `createdAt`, `userId`, `receiverId`) VALUES (?)";
 
         const values = [
             req.body.desc,
             req.body.img,
             moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
             userInfo.id,
+            req.body.receiverId
           ];
     
         db.query(q, [values], (err,data)=>{
             if(err) return res.staus(500).json(err)
-            return res.status(200).json("Post has been created.");
+            return res.status(200).json("Message has been created.");
         });
     });
 };
 
-export const deletePost = (req,res) => {
+export const deleteMessage = (req,res) => {
     const token = req.cookies.accessToken;
     if(!token) return res.status(401).json("Not logged in!")
 
