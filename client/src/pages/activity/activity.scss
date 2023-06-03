@@ -1,0 +1,102 @@
+@import "../../style.scss";
+
+.activity {
+  @include themify($themes) {
+    background-color: themed("bgSoft");
+    min-height: calc(100vh - 110px);
+    width: 100%;
+    height: calc(100% - 20px);
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+    padding-bottom: 20px;
+    position: relative;
+    
+    .title {
+      font-weight: Bold;
+      font-size: 28px;
+      color: themed("textColor");
+      padding: 25px 6% 0 6%;
+    }
+
+    .clear {
+      position: absolute;
+      top: 29px;
+      right: 6%;
+      
+      button {
+        padding: 5px 8px;
+        background-color: transparent;
+        border: 1px solid themed("textColor");
+        color: themed("textColor");
+        font-size: 15px;
+        border-radius: 6px;
+        cursor: pointer;
+        opacity: 0.8;
+
+        &:hover {opacity: 0.6;}
+      }
+    }
+
+    .container {
+      margin: 14px 6% 0 6%;
+      width: 88%;
+      height: calc(100% - 81px);
+      border-radius: 10px;
+      border: 1px solid themed("border");
+
+      .item { 
+        padding: 14px 8px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+        user-select: none;  
+        min-height: 25px;
+        text-decoration: none;
+
+        &:hover {
+          background-color:  themed("bgSoft2");
+        }
+      
+
+        .left {
+          display: flex;
+          align-items: center;
+          
+          .icon{
+              margin-right: 12px;
+
+              img {
+                margin-left: 3px;
+                margin-right: 1px;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-top: -1px;
+                margin-bottom: -5px;
+                flex-shrink: 0;
+            }
+          }
+
+          .label {
+              font-size: 16px;
+              color: themed("textColor");
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+          }
+        }
+
+        .right{
+          font-size: 16px;
+          margin-right: 10px;
+          color: themed("textColorSoft2");
+        }
+      }
+    }
+  }
+}

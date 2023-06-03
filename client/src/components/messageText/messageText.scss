@@ -1,0 +1,82 @@
+@import "../../style.scss";
+
+.messageText {
+  @include themify($themes) {
+    background-color: themed("bg");
+    border-radius: 0%;
+    margin-bottom: 0px;
+    height: 60px;
+    width: 100%;
+    border-top: 1px solid themed("border");
+
+    .container {
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      .left {
+        position: absolute;
+        left: 20px;
+        margin-right: 20px;
+        top: 18px;
+
+        &:hover {
+          opacity: 0.7;
+        }
+
+        * {
+          cursor: pointer;
+          color: themed("iconColor");
+        }
+      }
+
+      .center {
+        position: absolute;
+        left: 63px;
+        top: 11px;
+        width: calc(100% - 122px);
+        border: 1px solid themed("outlineSoft");
+        border-radius: 4px;
+
+
+        textarea {
+          outline: none;
+          background-color: transparent;
+          height: 25px;
+          font-size: 16px;
+          width: calc(100% - 9px);
+          resize: none;
+          border: none;
+          margin-left: 9px;
+          margin-top: 5px;
+          color: themed("textColor");
+        }
+
+        textarea::placeholder {
+          color: themed("textColor");
+          opacity: 0.8;
+        }
+      }
+
+      .right {
+        position: absolute;
+        right: 20px;
+        top: 18px;
+        margin-left: 20px;
+
+        button {
+          background-color: transparent;
+          border: none;
+          color: themed("iconColor");
+          cursor: pointer;
+          font-size: 21px;
+        }
+
+        button:hover {
+          opacity: 0.7;
+        }
+      }
+
+    }
+  }
+}

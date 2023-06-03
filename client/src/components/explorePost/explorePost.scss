@@ -1,0 +1,230 @@
+@import "../../style.scss";
+
+.explorePost {
+    @include themify($themes) {
+        background-color: themed("bg");
+        border: 1px solid themed("border");
+        position: fixed;
+        top: 0;
+        z-index: 4;
+        width: 45%;
+        margin-left: 5%;
+        margin-top: 140px;
+        height: 70%;
+        border-radius: 15px;
+        min-height: 550px;
+    
+        @include tablet{width: 65%;}
+        @include mobile2{width: 78%;}
+        @include mobile1{width: 76%; margin-top: 90px;}
+        @include mobile{width: 70%; min-height: 480px}
+        @include mobile400{margin-left: 8%; width: 84%; min-height: 440px}
+
+    
+        .content {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            height: 100%;
+            
+            .left{
+                display: flex;
+                width: 50%;
+                height: 100%;
+                flex-direction: column;
+                @include mobile1{width: 92%; margin-left: 4%;}
+
+                .top {
+
+                    .link {
+                        width: 50%;
+                        height: 60px;
+                        position: absolute;
+                        display: flex;
+                        align-items: center;
+                        margin-top: 10px;
+
+                        img {
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 50%;
+                            object-fit: cover;
+                            margin: 10px;
+                            margin-right: 12px;
+                            margin-left: 20px;
+                            flex-shrink: 0;
+                            @include mobile1 {margin-left: 3%;}
+                        }
+
+                        p {color: themed("textColor");}
+                    }
+                }
+
+                .img {
+                    display: flex;
+                    align-items: center;
+                    height: 100%;
+
+                    .content {
+                        display: flex;
+                        flex-direction: column;
+                        height: auto;
+
+                        img{
+                            margin-left: 3%;
+                            width: 94%;
+                            height: auto;
+                            aspect-ratio: 1/1;
+                            object-fit: cover;
+                            @include mobile1{
+                                margin-top: 15px;
+                            }
+                        }
+
+                        .desc {
+                            display: flex;
+                            flex-direction: row;
+                            margin-top: 13px;
+
+                            * {color: themed("textColor")}
+
+                            .heart{ 
+                                padding-left: 15px;
+                                padding-right: 9px;
+                                cursor: pointer;
+                                font-size: 30px;
+                                margin-top: -3px;
+                            }
+
+                            p { 
+                                font-size: 16px;
+                                margin-right: 10px;
+                                overflow-y: hidden;
+                                text-overflow: ellipsis;
+                                max-height: 40px;
+                            }
+                        }
+
+                    }
+                }   
+            }
+
+            .right {
+                border-left: 1px solid themed("border");
+                width: 50%;
+                height: 100%;
+                @include mobile1{
+                    display: none;
+                }
+                &::-webkit-scrollbar {display: none;}
+
+                .comments {
+                    max-height: calc(100% - 50px);
+                    height: auto;
+                    padding: 20px 0;
+                    margin-bottom: 40px;
+                    padding-bottom: 20px;
+                    overflow-y: auto;
+                    padding-right: 10px;
+                    z-index: 101;
+
+                    &::-webkit-scrollbar {display: none;}
+                    
+                    .space {height: 16px; width: 100%;}
+
+
+                    .commentBox {
+                        padding: 4px;
+                        margin-bottom: 10px;
+                        display: flex;
+                        gap: 6px;
+                        width: 100%;
+
+                        img {
+                            margin-left: 14px;
+                            margin-right: 5px;
+                            width: 36px;
+                            height: 36px;
+                            border-radius: 50%;
+                            object-fit: cover;
+                            flex-shrink: 0;
+                        }
+
+                        .info {
+                            flex:5;
+                            display: flex;  
+                            flex-direction: column;
+                            overflow: pre-wrap;
+                
+                            span {
+                            color:themed("textColor");
+                            font-size: 15px;
+                            font-weight: 500;
+                            }
+                    
+                            p{
+                                color:themed("textColorSoft");
+                                font-size: 12px;
+                                overflow: pre-wrap;
+                            }
+                        }
+                    
+                        .date{
+                            flex:1;
+                            align-self: center;
+                            color:themed("textColorSoft2");
+                            font-size: 12px;
+                        }
+                    }
+                }
+
+                .addComment {
+                    position: absolute;
+                    bottom: 0;
+                    width: 50%;
+                    height: 40px;
+                    border-top: 1px solid themed("border");
+                    display: flex;
+                    align-items: center;
+                    z-index: 102;
+                    background-color: themed("bg");
+
+                    input {
+                        margin-top: -5px;
+                        outline: none;
+                        width: 85%;
+                        margin-left: 16px;
+                        border: none;
+                        background-color: transparent;
+                        color: themed("textColor");
+                        font-size: 14px;
+                    }
+
+                    input::placeholder {
+                        color: themed("textColor");
+                        opacity: 0.8;
+                      }
+
+                    button {
+                        margin-top: -5px;
+                        width: 10%;
+                        border: none;
+                        cursor: pointer;
+                        margin-right: 2%;
+                        background-color: transparent;
+
+                        &:hover {
+                            opacity: 0.7;
+                        }
+
+                        * {
+                            margin-top: 5px;
+                            color: themed("textColor");
+                        }
+                     
+                    }
+                }
+            }
+        }
+    }
+}

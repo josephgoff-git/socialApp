@@ -1,0 +1,60 @@
+@import "../../style.scss";
+.messages {
+  @include themify($themes) {
+    position: relative;
+    height: calc(100% - 70px);
+    width: 100%;
+    background-color: themed("bgSoft");
+    min-height: calc(100vh - 70px);
+
+    .userTop {
+      position: sticky;
+      top: 0;
+      left: 0;
+      height: 32px;
+      width: 100%;
+      background-color: themed("bgSoft");
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 1px solid themed("border"); 
+      border-right: 1px solid themed("border");
+      z-index: 99;
+
+      .userTopContent {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        p {
+          color: themed("textColor");
+        }
+        
+        img {
+          height: 20px;
+          width: 20px;
+          border: 1px solid themed("textColor");
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
+    }
+
+
+    .messageDisplayDiv {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      padding: 0;
+      overflow-y: scroll;
+      height: calc(100% - 60px);
+      z-index: 3;
+
+      &::-webkit-scrollbar {display: none}
+    }
+
+    .messageText {
+      position: absolute;
+      bottom: 0;
+    }
+  }
+}

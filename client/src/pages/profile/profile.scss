@@ -1,0 +1,175 @@
+@import "../../style.scss";
+
+.profile {
+  @include themify($themes) {
+    background-color: themed("bgSoft");
+    padding-bottom: 40px;
+    min-height: calc(100vh - 110px);
+    height: calc(100% - 40px);
+    width: 100%;
+    position: relative;
+
+    .send {
+      position: absolute;
+      color: themed("textColorSoft2");
+      top: 359px;
+      right: 92px;
+      cursor: pointer;
+      opacity: 0.8;
+      @include tablet {right: 51px;}
+      @include mobile {top: 435px;}
+
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+
+    .images {
+      width: 100%;
+      height: 320px;
+      position: relative;
+
+      .cover {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .profilePic {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: auto;
+        top: 200px;
+        border: 1px solid white;
+      }
+    }
+
+    .profileContainer {
+      padding: 20px 90px;
+
+      @include mobile{
+        padding: 10px;
+      }
+
+      @include tablet2{
+        padding: 20px;
+      }
+
+      .uInfo {
+        height: 180px;
+        -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+        -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+        box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+        border-radius: 20px;
+        background-color: themed("bg");
+        color: themed("textColor");
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+
+        @include mobile{
+          flex-direction: column;
+          height: 30vh;
+          padding: 20px;
+          margin-top: 75px;
+        }
+
+        .top {
+          text-align: center;
+          margin-top: 25px;
+          margin-bottom: 15px;
+
+          span {
+            font-size: calc(15px + 1vw);
+          }
+        }
+
+        .middle {
+          margin-bottom: 15px;
+
+          .info {
+            width: 100%;
+            display: flex;
+
+            .city {
+              color: themed("textColorSoft");
+              width: 50%;
+              position: relative;
+
+              .city-div {
+                right: 0;
+                position: absolute;
+                margin-right: 10px;
+                display: flex;
+                align-items: center;
+                
+                span {
+                  margin-right: 4px;
+                  font-size: 13px;
+                  margin-left: 2px;
+                }
+              }
+            }
+
+            .website {
+              color: themed("textColorSoft");
+
+              .website-div {
+                display: flex;
+                margin-left: 10px;
+                align-items: center;
+                
+                span {
+                  margin-left: 6px;
+                  font-size: 13px;
+                }
+              }
+            }
+          }
+        }
+
+        .links {
+          align-items: center;
+          justify-content: center;
+          flex: 1;
+          display: flex;
+          gap: 10px;
+          margin-bottom: 15px;
+
+          a{
+            color: themed("textColorSoft");
+          }
+
+          a:hover {
+            opacity: 0.7;
+          }
+        }
+
+        .bottom {
+          display: flex;
+          justify-content: center;
+          padding-bottom: 30px;
+
+          button {
+            border: none;
+            background-color: #5271ff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+          }
+
+          button:hover {
+            opacity: 0.7;
+          }
+        }
+      }
+    }
+  }
+}

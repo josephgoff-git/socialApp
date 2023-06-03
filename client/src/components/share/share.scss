@@ -1,0 +1,138 @@
+@import "../../style.scss";
+
+.share {
+  @include themify($themes) {
+    -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+    -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+    box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+    border-radius: 20px;
+    background-color: themed("bg");
+    color: themed("textColor");
+    margin: 0 90px 23px 90px;
+    @include tablet{margin: 0 70px 23px 70px;}
+    @include mobile2{margin: 0 20px 23px 20px;}
+
+    .container {
+      padding: 20px;
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .left {
+          display: flex;
+          align-items: center;
+          flex: 3;
+
+          img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+          }
+
+          textarea {
+            outline: none;
+            height: 25px;
+            font-size: 16px;
+            width: 92%;
+            resize: none;
+            border: none;
+            color: themed("textColor");
+            margin-right: 4%;
+            margin-left: calc(7px + 1%);
+            background-color: transparent;
+          }
+  
+          textarea::placeholder {
+            width: 100%;
+            color: themed("textColor");
+            opacity: 0.8;
+          }
+        }
+
+        .right {
+          flex: 0;
+          display: flex;
+          justify-content: flex-end;
+          .file{
+              width: 100px;
+              height: 100px;
+              object-fit: cover;
+              border-radius: 5px;
+          }
+        }
+      }
+
+      hr {
+        margin: 20px 0px;
+        border: none;
+        height: 0.5px;
+        background-color: themed("border");
+      }
+
+      .bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .left {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+
+          .item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            opacity: 0.8;
+
+            .item-icon {
+              font-size: 24px;
+              color: themed("textColor");
+            }
+            img {
+              height: 20px;
+            }
+
+            .location {
+              margin-left: -6.5px;
+            }
+
+            span {
+              font-size: 12px;
+              color: themed("textColor");
+              user-select: none;
+
+              @include mobile1{
+                display: none;
+              }
+            }
+
+            &:hover {
+              opacity:0.6;
+            }
+          }
+        }
+        .right {
+          button {
+            border: none;
+            font-size: 11px;
+            padding: 6.5px;
+            color: themed("bg");
+            cursor: pointer;
+            background-color: themed("textColor");
+            opacity: 0.97;
+            border-radius: 3px;
+            margin-left: 5px;
+          }
+
+          button:hover {
+            opacity: 0.7;
+          }
+        }
+      }
+    }
+  }
+}

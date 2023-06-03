@@ -1,0 +1,202 @@
+@import "../../style.scss";
+
+.storyPage {
+  padding-top: 13px;
+  width: 100%;
+  
+  .storyDisplay{
+    border-left: solid 1px #444;
+    width: calc((100% - 160px) * 6/9);
+    position: fixed;
+    top: 70px;
+    height: 50%;
+    min-height: calc(100vh - 70px);
+    background-color: black;
+    z-index: 998;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include tablet { width: calc(100% - 160px)}
+    @include mobile1 { width: 100%; }
+
+    .close{
+      color: white;
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      z-index: 999;
+      cursor: pointer;
+
+      &:hover {filter: brightness(0.7);}
+    }
+
+    .menu {
+      position: absolute;
+      right: 64px;
+      top: 23px;
+      color: white;
+      z-index: 999;
+      cursor: pointer;
+
+      .menuButton{
+        margin-top: -3px;
+        padding: 5px 7px;
+        background-color: black;
+        cursor: pointer;
+        border: 1px solid white;
+        border-radius: 5px;
+        font-size: 14px;
+        &:hover{ filter: brightness(0.7);}
+      }
+    }
+
+    img {
+      max-height: 100%;
+      max-width: 100%;
+    }
+
+    button {
+      position: absolute;
+      border: none;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 22px;
+      border-radius: 9px;
+      border: 1px solid white;
+      background-color: black;
+      color: white;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: bold;
+    
+      &:hover {filter: brightness(0.7);}
+    }
+
+
+    .topLeft {
+      position: absolute;
+      top: 17px;
+      left: 17px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      background-color: black;
+      border: 1px solid white;
+      border-radius: 13px;
+      padding: 8px 14px 8px 8px;
+      &:hover {filter: brightness(0.7);}
+
+      img{
+        height: 28px;
+        width: 28px;
+        object-fit: cover;
+        border: 1px solid white;
+        border-radius: 50%;
+      }
+
+      p {
+        color: white;
+        font-size: 14px;
+        margin-left: 11px;
+        margin-top: -2px;
+      }
+    }
+  }
+
+  .storiesContainer {
+    width: calc(100% - 160px);
+    height: 60px;
+    margin: 0 80px 16px 80px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    position: absolute;
+    z-index: 1;
+    @include tablet{
+      width: calc(100% - 120px);
+      margin: 0 60px 16px 60px;
+    }
+    @include mobile2{
+      width: calc(100% - 40px);
+      margin: 0 20px 16px 20px;
+    }
+
+    &::-webkit-scrollbar {display: none;}
+
+    @include themify($themes) {
+      position: relative;
+      .stories {
+        width: auto;
+        height: 90%;
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin-top: 3px;
+        margin-left: 2px;
+        user-select: none;
+
+        .story1{
+          label {
+            cursor: pointer;
+
+            .button {
+              position: absolute;
+              top: 0px;
+              left: 35px;
+              color: white;
+              background-color: rgb(85,220,85);
+              filter: brightness(0.9);
+              border-radius: 50%;
+              width: 21px;
+              height: 21px;
+              cursor: pointer;
+              font-size: 21px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border: 1px solid white;
+              // z-index: 15;
+  
+              p {
+                margin-left: 1px;
+                margin-bottom: 1px;
+              }
+            }
+           
+            img {
+              filter: brightness(0.9)
+            }
+          }
+        }
+
+        .story {
+          border: 2px solid themed("bgSoft");
+          box-shadow: 0 0 0 1.2px themed("textColor");
+          border-radius: 50%;
+          margin-right: 10px;
+          width: auto;
+          z-index: 5;
+
+          &:hover{
+            filter: brightness(0.7);
+            cursor: pointer;
+          }
+
+          img {
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            flex-shrink: 0;
+            flex-grow: 0;
+            z-index: 4;
+            filter: brightness(0.95);
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            
+          }
+        }
+      }
+    }
+  }
+}

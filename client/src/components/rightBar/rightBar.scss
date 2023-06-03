@@ -1,0 +1,106 @@
+@import "../../style.scss";
+
+.rightBar {
+  @include themify($themes) {
+    flex: 3;
+    position: sticky;
+    top: 70px;
+    height: calc(100vh - 70px);
+    overflow: scroll;
+    background-color: themed("bgSoft");
+    border-left: 1px solid themed("border");
+
+    @include mobile{
+      display: none;
+    }
+
+    @include tablet{
+      display: none;
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .container {
+      padding: 20px;
+
+      .item {
+        -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        padding: 5px 20px;
+        margin-bottom: 14px;
+        background-color: themed("bg");
+        border-radius: 11px;
+        padding-top: 15px;
+        
+        span {
+          color: themed("textColorSoft3");
+        }
+
+        .user {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin: 20px 0px;
+          gap: 7px;
+
+          .userInfo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+
+            img {
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              object-fit: cover;
+              flex-shrink: 0;
+            }
+
+            .online {
+              width: 10px;
+              height: 10px;
+              border-radius: 50%;
+              background-color: themed("appColor");
+              position: absolute;
+              top: 0;
+              left: 30px;
+            }
+
+            p {
+              color: themed("textColorSoft2");
+              margin-right: 8px;
+            }
+
+            span {
+              font-weight: 500;
+              color: themed("textColor");
+            }
+          }
+
+          .buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            button {
+              padding: 5px;
+              color: themed("textColor");
+              cursor: pointer;
+              background-color: transparent;
+              border: 1px solid themed("textColor");
+              border-radius: 5px;
+
+              &:hover {
+                opacity: 0.7;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
